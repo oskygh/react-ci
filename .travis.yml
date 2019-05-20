@@ -8,6 +8,6 @@ script:
   - docker run oskygh/react-ci npm run test -- --coverage
 deploy:
   provider: gae
-  keyfile: client-secret.json
+  keyfile: ./client-secret.json
   project: My First Project
   on: master
