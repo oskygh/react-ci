@@ -1,9 +1,13 @@
 required: sudo
-
-services: -docker
-
+services: "-docker"
 before_install:
+  - openssl aes-256-cbc -K $encrypted_6fd40d645491_key -iv $encrypted_6fd40d645491_iv
+    -in client-secret.json.enc -out client-secret.json -d
   - docker build -t oskygh/react-ci -f Dockerfile.dev .
-
 script:
   - docker run oskygh/react-ci npm run test -- --coverage
+deploy:
+  provider: gae
+  keyfile: Yclient-secret.json
+  project: My First Project
+  on: master
